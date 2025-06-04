@@ -1,6 +1,8 @@
 package com.evalify.evalifybackend.quiz.service
 
 
+import com.evalify.evalifybackend.course.repository.CourseRepository
+import com.evalify.evalifybackend.quiz.domain.Quiz
 import com.evalify.evalifybackend.quiz.domain.QuizStudent
 import com.evalify.evalifybackend.quiz.repository.QuizRepository
 import com.evalify.evalifybackend.quiz.repository.QuizStudentRepository
@@ -13,8 +15,19 @@ import java.util.UUID
 class QuizStudentService(
     val quizRepository: QuizRepository,
     val userRepository: UserRepository,
-    val quizStudentRepository: QuizStudentRepository
+    val quizStudentRepository: QuizStudentRepository,
+    val courseRepository: CourseRepository,
 ) {
+
+    fun getAllQuiz(studentId: UUID): List<Quiz> {
+        val studentCourses = courseRepository.findCoursesByStudentId(studentId)
+        val quizzes = studentCourses.stream().map{
+            course -> course.quiz
+        }.toList()
+
+        return quizzes.flatten()
+
+    }
 
     fun getQuizQuestions(quizId: UUID,studentId: UUID,ipAddress:String){
         val quiz = quizRepository.findById(quizId).orElseThrow()
@@ -38,10 +51,5 @@ class QuizStudentService(
             quizStudent.ipAddress.add(ipAddress)
             quizStudentRepository.save(quizStudent);
         }
-
-
-
-
-
     }
 }

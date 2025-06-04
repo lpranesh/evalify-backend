@@ -5,6 +5,7 @@ import java.sql.Timestamp
 import java.time.Instant
 import java.util.*
 
+
 enum class Role {
     STUDENT,
     ADMIN,
@@ -28,4 +29,4 @@ class User (
     val isActive: Boolean = true,
     val createdAt: Timestamp = Timestamp.from(Instant.now()),
     val lastPasswordChange: Timestamp? = null
-)
+){}
