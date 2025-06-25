@@ -37,6 +37,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-rest")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8")
 	implementation("io.minio:minio:8.5.17")
+	implementation("com.github.sonus21:rqueue-spring-boot-starter:3.2.0-RELEASE")
 
 	//VJson
 	implementation("com.vladmihalcea:hibernate-types-60:2.21.1")
